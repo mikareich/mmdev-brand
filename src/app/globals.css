@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+html {
+  overflow-x: clip;
+}
+
 @theme {
   --font-mono: var(--font-geist-mono);
+
+  --color-theme-border-subtle: var(--color-taupe-200);
+  --color-theme-border: var(--color-taupe-300);
+  --color-theme-background: var(--color-white);
+  --color-theme-background-accent: var(--color-taupe-50);
+
+  --color-theme-text-subtle: var(--color-taupe-400);
+  --color-theme-text: var(--color-taupe-500);
 }

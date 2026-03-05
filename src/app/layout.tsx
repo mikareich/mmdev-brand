@@ -18,9 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={geistMono.variable}>
-      <body className="antialiased font-mono">
-        <main className="container mx-auto pt-10">{children}</main>
+    <html lang="en" className={`bg-theme-background ${geistMono.variable}`}>
+      <body className="antialiased font-mono overflow-x-hidden min-h-screen leading-loose text-theme-text">
+        <main className="relative container mx-auto max-w-prose min-h-screen overflow-y-clip py-16 px-4">
+          {children}
+        </main>
       </body>
     </html>
   );
