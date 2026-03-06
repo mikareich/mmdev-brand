@@ -1,5 +1,4 @@
 import type React from "react";
-import { isValidElement } from "react";
 import cn from "~/utils/cn";
 import { zeroPad } from "~/utils/zeroPad";
 import BorderBox from "./BorderBox";
@@ -19,35 +18,36 @@ export default function Section({
   contents,
   ...props
 }: SectionProps) {
+  const hasActions = !!headerActions;
+
   return (
-    <BorderBox className="border-theme-border">
+    <BorderBox className="border-theme-border" asChild>
       <section
         className={cn(
-          `w-fill p-2 sm:p-4 bg-theme-background-accent overflow-hidden grid gap-4
-          ${headerActions ? "grid-cols-2" : "grid-cols-1"}`,
+          "w-fill p-2 sm:p-4 bg-theme-background-accent overflow-hidden grid gap-4",
+          hasActions ? "grid-cols-2" : "grid-cols-1",
           className,
         )}
         {...props}
       >
-        <BorderBox className="grid grid-cols-subgrid col-span-full py-1 sm:py-2 leading-none border-theme-border-subtle">
-          <h2 className="flex gap-2 font-bold text-2xl">
-            <span className="text-theme-text-subtle">{zeroPad(level)}</span>
-            <span className="text-theme-text-subtle">/</span>
-            <span className="text-theme-text uppercase">{title}</span>
-          </h2>
+        <BorderBox
+          asChild
+          className="col-span-full p-1 sm:p-2 leading-none border-theme-border-subtle"
+        >
+          <div className={cn(hasActions && "grid grid-cols-2 items-center")}>
+            <h2 className="flex gap-2 font-bold text-2xl">
+              <span className="text-theme-text-subtle">{zeroPad(level)}</span>
+              <span className="text-theme-text-subtle">/</span>
+              <span className="text-theme-text uppercase">{title}</span>
+            </h2>
 
-          {headerActions}
+            {hasActions && (
+              <div className="justify-self-end">{headerActions}</div>
+            )}
+          </div>
         </BorderBox>
 
-        {contents.map((content) => {
-          if (!isValidElement<React.ReactElement>(content)) return null;
-
-          return (
-            <BorderBox className="border-theme-border-subtle" key={content.key}>
-              {content}
-            </BorderBox>
-          );
-        })}
+        {contents}
       </section>
     </BorderBox>
   );
