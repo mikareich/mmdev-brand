@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`bg-theme-background ${geistMono.variable}`}>
       <body className="antialiased font-mono overflow-x-hidden min-h-screen leading-loose text-theme-text">
-        <main className="relative container mx-auto max-w-prose min-h-screen overflow-y-clip py-16 px-4">
+        <main className="relative container mx-auto min-h-screen overflow-y-clip py-16 px-4">
           {children}
         </main>
       </body>
