@@ -2,6 +2,7 @@
 
 html {
   overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 @theme {
@@ -14,4 +15,44 @@ html {
 
   --color-theme-text-subtle: var(--color-taupe-400);
   --color-theme-text: var(--color-taupe-500);
+  --font-mono: var(--font-geist-mono);
+}
+
+@property --scroll-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+:root {
+  --header-py-min: 16px;
+  --header-py-max: 48px;
+  --header-font-min: 36px;
+  --header-font-max: 54px;
+  --header-max-height: calc(
+    var(--header-py-max) * 2 + var(--header-font-max) * 2
+  );
+  --header-py: calc(
+    var(--header-py-max) - (var(--header-py-max) - var(--header-py-min)) *
+      var(--scroll-progress)
+  );
+}
+
+.header {
+  padding-block: var(--header-py);
+}
+
+.header-title {
+  font-size: calc(
+    var(--header-font-max) - (var(--header-font-max) - var(--header-font-min)) *
+      var(--scroll-progress)
+  );
+}
+
+main {
+  margin-top: var(--header-max-height);
+}
+
+section {
+  scroll-margin-top: var(--header-max-height);
 }
