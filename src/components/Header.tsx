@@ -1,8 +1,8 @@
 "use client";
+import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
-import LinkButton from "./LinkButton";
 import Button from "./Button";
-import { HamburgerMenuIcon, Cross1Icon } from "@radix-ui/react-icons";
+import LinkButton from "./LinkButton";
 
 const HEADER_SHRINK_SCROLL_DISTANCE = 100;
 
@@ -24,7 +24,7 @@ function DesktopHeaderNav() {
           key={link.label}
           href={link.href}
           className="text-xl w-full text-center"
-          variant="Ghost"
+          variant="ghost"
         >
           {link.label}
         </LinkButton>
@@ -32,7 +32,7 @@ function DesktopHeaderNav() {
       <LinkButton
         href=""
         className="text-xl w-full text-center"
-        variant="Filled"
+        variant="filled"
       >
         START NOW
       </LinkButton>
@@ -66,7 +66,7 @@ function MobileHeaderNav({
         <LinkButton
           href=""
           className="block text-center py-2 w-full"
-          variant="Filled"
+          variant="filled"
           onClick={onNavClick}
         >
           Start now
@@ -118,7 +118,7 @@ export default function Header() {
           <div className="min-w-fit px-4">
             <Button
               onClick={scrollTop}
-              variant="Ghost"
+              variant="ghost"
               className="header-title font-extrabold text-taupe-600"
             >
               MMDEV
