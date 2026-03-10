@@ -3,7 +3,7 @@ export const PRODUCTS = [
     id: 0,
     name: "Postcard",
     description:
-      "A sharp, single-page website to get your business online quickly. Perfect for focused landing pages, portfolios, or a bold digital business card.",
+      "A sharp, lightning-fast single-page website perfect for focused landing pages, portfolios, or a bold digital business card.",
     features: [
       "Single-Page Application",
       "Basic SEO Setup",
@@ -16,7 +16,7 @@ export const PRODUCTS = [
     id: 1,
     name: "Letter",
     description:
-      "Clear and detailed. A classic multi-page foundation giving you the necessary space to explain your services and tell your story.",
+      "A structured, multi-page foundation with a built-in CMS, giving you the space to detail your services and tell your story.",
     features: [
       "Everything in Postcard",
       "Multi-Page Structure",
@@ -30,7 +30,7 @@ export const PRODUCTS = [
     id: 2,
     name: "Parcel",
     description:
-      "Clear and detailed. A classic multi-page foundation giving you the necessary space to explain your services and tell your story.",
+      "A robust, scalable platform engineered for complex architecture, dynamic content, and advanced custom integrations.",
     features: [
       "Everything in Letter",
       "Dynamic Architecture",
