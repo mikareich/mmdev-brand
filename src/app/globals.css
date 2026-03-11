@@ -29,6 +29,7 @@ html {
   --header-py-max: 48px;
   --header-font-min: 36px;
   --header-font-max: 54px;
+  /* times 2 works for the font, dont ask me why */
   --header-max-height: calc(
     var(--header-py-max) * 2 + var(--header-font-max) * 2
   );

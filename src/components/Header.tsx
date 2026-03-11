@@ -12,10 +12,6 @@ const navLinks = [
   { label: "03 HOW", href: "" },
 ];
 
-interface NavProps {
-  onNavClick?: () => void;
-}
-
 function DesktopHeaderNav() {
   return (
     <div className="hidden lg:flex gap-4 w-full max-w-200 px-4 items-center">
@@ -47,30 +43,37 @@ function MobileHeaderNav({
   isOpen: boolean;
   onNavClick: () => void;
 }) {
-  if (!isOpen) return null;
-
   return (
-    <div className="lg:hidden absolute top-full left-0 right-0 bg-taupe-100 border-b border-taupe-300 shadow-lg animate-in fade-in slide-in-from-top-2 duration-200">
-      <div className="px-4 py-4 space-y-3 border-t border-taupe-300">
-        {navLinks.map((link) => (
+    <div
+      aria-hidden={!isOpen}
+      className={`lg:hidden absolute top-full left-0 right-0 bg-taupe-100 border-y border-taupe-300 transition-all duration-200 ease-in-out ${
+        isOpen
+          ? "opacity-100 translate-y-0 pointer-events-auto"
+          : "opacity-0 -translate-y-2 pointer-events-none"
+      }`}
+    >
+      <div className="container px-4 w-full mx-auto">
+        <div className="border-x border-taupe-300 px-4 py-4 space-y-3">
+          {navLinks.map((link) => (
+            <LinkButton
+              key={link.label}
+              href={link.href}
+              className="block text-center py-2"
+              variant="outlined"
+              onClick={onNavClick}
+            >
+              {link.label}
+            </LinkButton>
+          ))}
           <LinkButton
-            key={link.label}
-            href={link.href}
-            className="block text-center py-2"
-            variant="Outline"
+            href=""
+            className="block text-center py-2 w-full"
+            variant="filled"
             onClick={onNavClick}
           >
-            {link.label}
+            Start now
           </LinkButton>
-        ))}
-        <LinkButton
-          href=""
-          className="block text-center py-2 w-full"
-          variant="filled"
-          onClick={onNavClick}
-        >
-          Start now
-        </LinkButton>
+        </div>
       </div>
     </div>
   );
@@ -101,6 +104,7 @@ export default function Header() {
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    closeMobileMenu();
   };
 
   const toggleMobileMenu = () => {
@@ -112,7 +116,7 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 z-50 px-auto bg-taupe-100 w-full border-b border-taupe-300">
+    <header className="fixed top-0 left-0 z-50 bg-taupe-100 w-full border-b border-taupe-300">
       <div className="px-4 w-full h-full m-auto container">
         <div className="header flex justify-between items-center w-full border-taupe-300 border-x h-full">
           <div className="min-w-fit px-4">
@@ -127,24 +131,22 @@ export default function Header() {
 
           <DesktopHeaderNav />
 
-          <button
+          <Button
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
             onClick={toggleMobileMenu}
             className="lg:hidden p-2 mr-4 rounded-lg transition-colors"
-            aria-label="Toggle menu"
+            variant={"ghost"}
           >
             {isMobileMenuOpen ? (
               <Cross1Icon className="w-6 h-6 text-taupe-600" />
             ) : (
               <HamburgerMenuIcon className="w-6 h-6 text-taupe-600" />
             )}
-          </button>
+          </Button>
         </div>
-
-        <MobileHeaderNav
-          isOpen={isMobileMenuOpen}
-          onNavClick={closeMobileMenu}
-        />
       </div>
+      <MobileHeaderNav isOpen={isMobileMenuOpen} onNavClick={closeMobileMenu} />
     </header>
   );
 }
