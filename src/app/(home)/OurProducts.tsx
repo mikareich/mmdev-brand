@@ -20,7 +20,12 @@ export default function OurProducts() {
                 key={product.id}
                 asChild
               >
-                <Button variant="outlined">{product.name}</Button>
+                <Button
+                  variant="outlined"
+                  className="data-[state=active]:bg-taupe-200"
+                >
+                  {product.name}
+                </Button>
               </Tabs.Trigger>
             ))}
           </Tabs.List>
@@ -34,7 +39,7 @@ export default function OurProducts() {
             <div>
               Our packages—Postcard, Letter, and Parcel—give you exactly what
               you need with zero bloat. Our process is just as simple:
-              <ol className="list-decimal list-inside">
+              <ol className="list-disc marker:text-taupe-400 list-inside">
                 <li>Align: We define your goals and scope.</li>
                 <li>Build: We engineer a fast, modern site.</li>
                 <li>Launch: We deploy your site and hand you the keys.</li>
@@ -46,18 +51,23 @@ export default function OurProducts() {
             className="p-1 sm:p-2 border-theme-border-subtle"
             key={2}
           >
-            <div>
+            <div className="grid">
               {PRODUCTS.map((product) => (
-                <Tabs.Content key={product.id} value={product.id.toString()}>
+                <Tabs.Content
+                  forceMount
+                  key={product.id}
+                  className="gap-2 col-start-1 row-start-1 data-[state=inactive]:opacity-0 h-full flex flex-col"
+                  value={product.id.toString()}
+                >
                   <p>{product.description}</p>
 
-                  <ol className="list-decimal list-inside">
+                  <ol className="list-decimal marker:text-taupe-400 list-inside">
                     {product.features.map((feature) => (
                       <li key={feature}>{feature}</li>
                     ))}
                   </ol>
 
-                  <p className="mt-2 uppercase text-right">
+                  <p className="uppercase text-right mt-auto">
                     Starting at{" "}
                     <span className="font-bold text-xl">${product.price}</span>
                   </p>
