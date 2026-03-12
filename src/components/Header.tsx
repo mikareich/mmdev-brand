@@ -83,6 +83,15 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    history.scrollRestoration = "manual";
+
+    // Restore saved position
+    const saved = sessionStorage.getItem("scrollY");
+    if (saved) {
+      window.scrollTo(0, parseInt(saved));
+      sessionStorage.removeItem("scrollY");
+    }
+
     const onScroll = () => {
       const progress = Math.min(
         window.scrollY / HEADER_SHRINK_SCROLL_DISTANCE,
@@ -92,14 +101,11 @@ export default function Header() {
         "--scroll-progress",
         String(progress),
       );
+      sessionStorage.setItem("scrollY", String(window.scrollY));
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const scrollTop = () => {
