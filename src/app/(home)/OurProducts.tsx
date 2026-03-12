@@ -1,14 +1,20 @@
 "use client";
 
 import * as Tabs from "@radix-ui/react-tabs";
+import React from "react";
 import BorderBox from "~/components/BorderBox";
 import Button from "~/components/Button";
 import Section from "~/components/Section";
 import { PRODUCTS } from "~/content/products";
 
 export default function OurProducts() {
+  const [activeTab, setActiveTab] = React.useState(PRODUCTS[0].id.toString());
   return (
-    <Tabs.Root defaultValue={PRODUCTS[0].id.toString()}>
+    <Tabs.Root
+      defaultValue={activeTab}
+      value={activeTab}
+      onValueChange={(tabId) => setActiveTab(tabId)}
+    >
       <Section
         level={2}
         title="Our Products"
@@ -21,8 +27,9 @@ export default function OurProducts() {
                 asChild
               >
                 <Button
-                  variant="outlined"
-                  className="data-[state=active]:bg-taupe-200"
+                  variant={
+                    product.id.toString() === activeTab ? "filled" : "outlined"
+                  }
                 >
                   {product.name}
                 </Button>

@@ -5,7 +5,8 @@ type ButtonVariant = "outlined" | "filled" | "ghost";
 export const base = "px-4 py-2 cursor-pointer transition-colors";
 
 export const variants: Record<ButtonVariant, string> = {
-  filled: "bg-taupe-600 text-taupe-100 hover:bg-taupe-500",
+  filled:
+    "bg-taupe-600 text-taupe-100 hover:bg-taupe-500 text-sm font-medium uppercase border-1 border-taupe-600",
   outlined:
     "bg-transparent text-taupe-500 border-1 border-taupe-300 text-sm font-medium uppercase hover:bg-taupe-100",
   ghost: "bg-transparent text-taupe-500 hover:text-taupe-600",
