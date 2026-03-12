@@ -25,13 +25,12 @@ html {
 }
 
 :root {
-  --header-py-min: 16px;
-  --header-py-max: 48px;
+  --header-py-min: 0;
+  --header-py-max: 16px;
   --header-font-min: 36px;
   --header-font-max: 54px;
-  /* times 2 works for the font, dont ask me why */
   --header-max-height: calc(
-    var(--header-py-max) * 2 + var(--header-font-max) * 2
+    var(--header-py-max) * 2 + var(--header-font-max) * 1.2
   );
   --header-py: calc(
     var(--header-py-max) - (var(--header-py-max) - var(--header-py-min)) *
