@@ -30,7 +30,8 @@ export default function OurProducts() {
             ))}
           </Tabs.List>
         }
-        contents={[
+      >
+        {[
           <BorderBox
             asChild
             className="p-1 sm:p-2 border-theme-border-subtle"
@@ -76,7 +77,7 @@ export default function OurProducts() {
             </div>
           </BorderBox>,
         ]}
-      />
+      </Section>
     </Tabs.Root>
   );
 }
