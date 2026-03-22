@@ -1,4 +1,5 @@
 import OurProducts from "./OurProducts";
+import Showcase from "./Showcase";
 import WhoWeAre from "./WhoWeAre";
 
 export default function Home() {
@@ -7,6 +8,8 @@ export default function Home() {
       <WhoWeAre />
 
       <OurProducts />
+
+      <Showcase />
     </article>
   );
 }
