@@ -1,36 +1,40 @@
+import { cva } from "class-variance-authority";
+import { Slot } from "radix-ui";
 import cn from "~/utils/cn";
 
-type ButtonVariant = "outlined" | "filled" | "ghost";
+export const buttonVariants = cva(
+  "px-4 py-2 cursor-pointer transition-colors",
+  {
+    variants: {
+      variant: {
+        filled:
+          "bg-taupe-600 text-taupe-100 hover:bg-taupe-500 text-sm text-action border-1 border-taupe-600",
+        outlined:
+          "bg-transparent text-taupe-500 border-1 border-taupe-300 text-sm text-action hover:bg-taupe-100",
+        ghost: "bg-transparent text-taupe-500 hover:text-taupe-600",
+      },
+    },
+  },
+);
 
-export const base = "px-4 py-2 cursor-pointer transition-colors";
-
-export const variants: Record<ButtonVariant, string> = {
-  filled:
-    "bg-taupe-600 text-taupe-100 hover:bg-taupe-500 text-sm text-action border-1 border-taupe-600",
-  outlined:
-    "bg-transparent text-taupe-500 border-1 border-taupe-300 text-sm text-action hover:bg-taupe-100",
-  ghost: "bg-transparent text-taupe-500 hover:text-taupe-600",
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant: "filled" | "ghost" | "outlined";
+  asChild?: boolean;
 };
 
-export type ButtonProps = {
-  children: React.ReactNode;
-  variant: ButtonVariant;
-  className?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
-
 export default function Button({
-  children,
-  variant = "filled",
   className,
+  variant,
+  asChild = false,
   ...props
 }: ButtonProps) {
+  const Comp = asChild ? Slot.Root : "button";
+
   return (
-    <button
-      type="button"
-      className={cn(base, variants[variant], className)}
+    <Comp
+      type={asChild ? undefined : props.type || "button"}
+      className={cn(buttonVariants({ variant, className }))}
       {...props}
-    >
-      {children}
-    </button>
+    />
   );
 }
