@@ -18,6 +18,11 @@ The structure of our brand website starts with a short intro section about us an
 - Icons: radix-ui/icons.
 - Deployment: Vercel linked to our github repositorys.
 
+## Scripts
+
+- Defined scripts are `bun run dev|build|start|install`
+- Lint and format with `bun run lint|format`
+
 ## Code Sanity: DOs and DONTs
 
 - Commit Rules: Always respect formal [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/#specification)
