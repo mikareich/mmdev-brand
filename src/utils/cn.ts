@@ -1,7 +1,7 @@
 import clsx, { type ClassValue } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
-const customTwMerge = extendTailwindMerge({
+const customTwMerge = extendTailwindMerge<"text-action">({
   extend: {
     classGroups: {
       "text-action": ["text-action"],
