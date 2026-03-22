@@ -16,12 +16,16 @@ html {
   --color-theme-text-subtle: var(--color-taupe-400);
   --color-theme-text: var(--color-taupe-500);
   --color-theme-destructive: var(--color-red-500);
+<<<<<<< HEAD
   --font-heading: var(--font-geist-mono);
   --font-body: var(--font-fira-sans);
+=======
+  --font-mono: var(--font-geist-mono);
+>>>>>>> 92cd36f (feat(contact): add contact form with dedicated action)
 }
 
 @utility text-action {
-  @apply font-medium uppercase;
+  @apply font-medium text-sm uppercase;
 }
 
 @property --scroll-progress {

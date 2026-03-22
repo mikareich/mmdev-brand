@@ -1,3 +1,4 @@
+import Contact from "./Contact";
 import OurProducts from "./OurProducts";
 import Showcase from "./Showcase";
 import WhoWeAre from "./WhoWeAre";
@@ -10,6 +11,8 @@ export default function Home() {
       <OurProducts />
 
       <Showcase />
+
+      <Contact />
     </article>
   );
 }
