@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`bg-theme-background ${geistMono.variable}`}>
+    <html lang="en" className={`${geistMono.variable}`}>
       <body className="antialiased font-mono overflow-x-hidden min-h-screen leading-loose text-theme-text">
         <Header />
         <main
