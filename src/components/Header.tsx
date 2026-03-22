@@ -1,8 +1,9 @@
 "use client";
+
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import Button from "./Button";
-import LinkButton from "./LinkButton";
 
 const HEADER_SHRINK_SCROLL_DISTANCE = 100;
 
@@ -16,22 +17,18 @@ function DesktopHeaderNav() {
   return (
     <div className="hidden lg:flex gap-4 w-full max-w-200 px-4 items-center">
       {navLinks.map((link) => (
-        <LinkButton
+        <Button
+          asChild
           key={link.label}
-          href={link.href}
           className="text-xl w-full text-center"
           variant="ghost"
         >
-          {link.label}
-        </LinkButton>
+          <Link href={link.href}>{link.label}</Link>
+        </Button>
       ))}
-      <LinkButton
-        href=""
-        className="text-xl w-full text-center"
-        variant="filled"
-      >
-        START NOW
-      </LinkButton>
+      <Button asChild className="text-xl w-full text-center" variant="filled">
+        <Link href="">START NOW</Link>
+      </Button>
     </div>
   );
 }
@@ -55,24 +52,24 @@ function MobileHeaderNav({
       <div className="container px-4 w-full mx-auto">
         <div className="border-x border-taupe-300 px-4 py-4 space-y-3">
           {navLinks.map((link) => (
-            <LinkButton
+            <Button
+              asChild
               key={link.label}
-              href={link.href}
               className="block text-center py-2"
               variant="outlined"
               onClick={onNavClick}
             >
-              {link.label}
-            </LinkButton>
+              <Link href={link.href}>{link.label}</Link>
+            </Button>
           ))}
-          <LinkButton
-            href=""
+          <Button
+            asChild
             className="block text-center py-2 w-full"
             variant="filled"
             onClick={onNavClick}
           >
-            Start now
-          </LinkButton>
+            <Link href={""}>Start now</Link>
+          </Button>
         </div>
       </div>
     </div>
