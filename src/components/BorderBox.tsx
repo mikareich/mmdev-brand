@@ -15,22 +15,20 @@ export default function BorderBox({
 
   return (
     <div
-      className={cn("relative box-border p-px border-0 bg-inherit", className)}
+      className={cn(
+        "relative box-border border border-solid border-inherit bg-inherit",
+        className,
+      )}
       {...props}
     >
-      {/* left guide */}
-      <span className="pointer-events-none absolute left-0 top-1/2 z-0 h-screen w-px -translate-y-1/2 border-[0.25px] border-inherit" />
+      <span className="pointer-events-none absolute -left-px -top-[100vmax] -bottom-[100vmax] z-[-1] w-px border-l border-solid border-inherit" />
+      <span className="pointer-events-none absolute -right-px -top-[100vmax] -bottom-[100vmax] z-[-1] w-px border-r border-solid border-inherit" />
+      <span className="pointer-events-none absolute -top-px -left-[100vmax] -right-[100vmax] z-[-1] h-px border-t border-solid border-inherit" />
+      <span className="pointer-events-none absolute -bottom-px -left-[100vmax] -right-[100vmax] z-[-1] h-px border-b border-solid border-inherit" />
 
-      {/* right guide */}
-      <span className="pointer-events-none absolute right-0 top-1/2 z-0 h-screen w-px -translate-y-1/2 border-[0.25px] border-inherit" />
-
-      {/* top guide */}
-      <span className="pointer-events-none absolute left-1/2 top-0 z-0 h-px w-[200vmax] -translate-x-1/2 border-[0.25px] border-inherit" />
-
-      {/* bottom guide */}
-      <span className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-px w-[200vmax] -translate-x-1/2 border-[0.25px] border-inherit" />
-
-      <Inner className="relative z-10">{children}</Inner>
+      <Inner className="relative z-10 h-full w-full overflow-clip bg-inherit">
+        {children}
+      </Inner>
     </div>
   );
 }
