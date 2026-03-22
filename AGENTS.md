@@ -28,6 +28,7 @@ The structure of our brand website starts with a short intro section about us an
 - Commit Rules: Always respect formal [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/#specification)
 - use semantic html
 - avoid unnecessay js for simple styling issues
+- if you want to use the type def of props for native html elements, do not use the pattern `React.[COMPONENT]HTMLATTRIBUTES<...>` but `React.ComponentProps<[COMPONENT]>` instead!
 
 ## References
 
