@@ -18,6 +18,10 @@ html {
   --font-mono: var(--font-geist-mono);
 }
 
+@utility text-action {
+  @apply font-medium uppercase;
+}
+
 @property --scroll-progress {
   syntax: "<number>";
   inherits: true;
@@ -30,11 +34,15 @@ html {
   --header-font-min: 36px;
   --header-font-max: 54px;
   --header-max-height: calc(
-    var(--header-py-max) * 2 + var(--header-font-max) * 1.2
+    var(--header-py-max) *
+    2 +
+    var(--header-font-max) *
+    1.2
   );
   --header-py: calc(
-    var(--header-py-max) - (var(--header-py-max) - var(--header-py-min)) *
-      var(--scroll-progress)
+    var(--header-py-max) -
+    (var(--header-py-max) - var(--header-py-min)) *
+    var(--scroll-progress)
   );
 }
 
@@ -44,8 +52,9 @@ html {
 
 .header-title {
   font-size: calc(
-    var(--header-font-max) - (var(--header-font-max) - var(--header-font-min)) *
-      var(--scroll-progress)
+    var(--header-font-max) -
+    (var(--header-font-max) - var(--header-font-min)) *
+    var(--scroll-progress)
   );
 }
 

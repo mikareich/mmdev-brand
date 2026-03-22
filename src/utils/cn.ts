@@ -1,7 +1,15 @@
 import clsx, { type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+const customTwMerge = extendTailwindMerge({
+  extend: {
+    classGroups: {
+      "text-action": ["text-action"],
+    },
+  },
+});
 
 /** merges tailwind classes and ensures only the last conflicting class is kept */
 export default function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return customTwMerge(clsx(inputs));
 }
