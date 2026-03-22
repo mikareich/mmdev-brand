@@ -17,7 +17,7 @@ export const buttonVariants = cva(
   },
 );
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = React.ComponentProps<"button"> & {
   variant: "filled" | "ghost" | "outlined";
   asChild?: boolean;
 };
