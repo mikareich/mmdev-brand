@@ -5,6 +5,11 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: var(--color-theme-background);
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e8e4e5' fill-rule='evenodd'%3E%3Cpath d='M19 0h1L0 20V19zM20 19v1H19z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
 @theme {
   --font-mono: var(--font-geist-mono);
 
@@ -16,12 +21,8 @@ html {
   --color-theme-text-subtle: var(--color-taupe-400);
   --color-theme-text: var(--color-taupe-500);
   --color-theme-destructive: var(--color-red-500);
-<<<<<<< HEAD
   --font-heading: var(--font-geist-mono);
   --font-body: var(--font-fira-sans);
-=======
-  --font-mono: var(--font-geist-mono);
->>>>>>> 92cd36f (feat(contact): add contact form with dedicated action)
 }
 
 @utility text-action {
