@@ -29,8 +29,9 @@ export default function RootLayout({
       lang="en"
       className={`bg-theme-background ${geistMono.variable} ${firaSans.variable}`}
     >
-      <body className="antialiased font-body overflow-x-hidden min-h-screen leading-loose text-theme-text">
+      <body className="isolate antialiased font-body overflow-x-hidden min-h-screen leading-loose text-theme-text">
         <Header />
+
         <main
           id="main"
           className="relative container mx-auto min-h-screen overflow-y-clip py-16 px-4"
