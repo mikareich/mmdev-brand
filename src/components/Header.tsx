@@ -126,7 +126,7 @@ export default function Header() {
             <Button
               onClick={scrollTop}
               variant="ghost"
-              className="header-title font-extrabold text-taupe-600"
+              className="header-title font-heading font-extrabold text-taupe-600"
             >
               MMDEV
             </Button>

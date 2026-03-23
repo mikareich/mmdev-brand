@@ -37,7 +37,7 @@ export default function Section({
           className="col-span-full p-1 sm:p-2 leading-none border-theme-border-subtle"
         >
           <div className={cn(hasActions && "grid grid-cols-2 items-center")}>
-            <h2 className="flex gap-2 font-bold text-2xl">
+            <h2 className="flex gap-2 font-bold text-2xl font-heading">
               <span className="text-theme-text-subtle">{zeroPad(level)}</span>
               <span className="text-theme-text-subtle">/</span>
               <span className="text-theme-text uppercase">{title}</span>
