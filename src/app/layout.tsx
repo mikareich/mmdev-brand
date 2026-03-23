@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Fira_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "~/components/Header";
+
+const firaSans = Fira_Sans({
+  variable: "--font-fira-sans",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -19,8 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistMono.variable}`}>
-      <body className="antialiased font-mono overflow-x-hidden min-h-screen leading-loose text-theme-text">
+    <html
+      lang="en"
+      className={`bg-theme-background ${geistMono.variable} ${firaSans.variable}`}
+    >
+      <body className="antialiased font-body overflow-x-hidden min-h-screen leading-loose text-theme-text">
         <Header />
         <main
           id="main"
