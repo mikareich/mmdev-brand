@@ -15,6 +15,13 @@
       "when": 1774297945121,
       "tag": "0001_curved_frank_castle",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1774308240849,
+      "tag": "0002_clean_frank_castle",
+      "breakpoints": true
     }
   ]
 }

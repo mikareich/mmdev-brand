@@ -11,10 +11,40 @@ import Input from "~/components/Input";
 import Section from "~/components/Section";
 import Select from "~/components/Select";
 import Textarea from "~/components/Textarea";
+import { Toast } from "~/components/Toast";
 import { PRODUCTS } from "~/content/products";
 import { type ContactSchema, contactSchema } from "~/utils/contactSchema";
 
 export default function Contact() {
+  const [toastOpen, setToastOpen] = React.useState(false);
+  const [toastConfig, setToastConfig] = React.useState<{
+    title: string;
+    description: string;
+  }>({
+    title: "",
+    description: "",
+  });
+
+  const onSubmit = async (data: ContactSchema) => {
+    const result = await createProjectRequest(data);
+
+    if (result.success) {
+      setToastConfig({
+        title: "Request Sent!",
+        description:
+          "You should receive a confirmation email shortly. Please check your spam folder just in case.",
+      });
+    } else {
+      setToastConfig({
+        title: "Request Failed",
+        description:
+          "There was an issue sending your request. Please try again later.",
+      });
+    }
+
+    setToastOpen(true);
+  };
+
   const {
     register,
     control,
@@ -22,11 +52,6 @@ export default function Contact() {
     formState: { errors, isSubmitting },
   } = useForm<ContactSchema>({
     resolver: zodResolver(contactSchema),
-    defaultValues: {
-      product: "",
-      email: "",
-      details: "",
-    },
   });
 
   return (
@@ -52,10 +77,7 @@ export default function Contact() {
           asChild
           className="p-1 sm:p-2 border-theme-border-subtle"
         >
-          <Form.Root
-            className="space-y-4"
-            onSubmit={handleSubmit(createProjectRequest)}
-          >
+          <Form.Root className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <Form.Field name="product" className="flex flex-col gap-1">
               <Form.Label className="text-action">Product Package</Form.Label>
 
@@ -135,6 +157,12 @@ export default function Contact() {
           </Form.Root>
         </BorderBox>,
       ]}
+      <Toast
+        open={toastOpen}
+        onOpenChange={setToastOpen}
+        title={toastConfig.title}
+        description={toastConfig.description}
+      />
     </Section>
   );
 }

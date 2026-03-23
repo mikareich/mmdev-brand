@@ -31,6 +31,7 @@ The structure of our brand website starts with a short intro section about us an
 - if you want to use the type def of props for native html elements, do not use the pattern `React.[COMPONENT]HTMLAttributes<...>` but `React.ComponentProps<[COMPONENT]>` instead!
 - if you encounter css values that are usally reusable given the context (text-red-500 to be "destructive"), take a look at `./src/app/globals.css` to either use the values that are already present or define a new variable and use this.
 - use `z.email` instead of `z.string().email`
+- every ui component should be directly in the `./src/components` folder, not in a nested `ui` folder.
 
 ## References
 

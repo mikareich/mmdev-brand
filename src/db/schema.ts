@@ -6,7 +6,8 @@ export const contacts = sqliteTable("contacts", {
   email: text("email").notNull(),
   product: text("product").notNull(),
   details: text("details").notNull(),
-  createdAt: integer("timestamp2", { mode: "timestamp_ms" })
+  createdAt: integer("created_at", { mode: "timestamp_ms" })
     .notNull()
     .default(sql`(unixepoch() * 1000)`),
+  messageId: text("message_id"),
 });

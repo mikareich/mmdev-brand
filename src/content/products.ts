@@ -1,4 +1,12 @@
-export const PRODUCTS = [
+export type Product = {
+  id: number;
+  name: string;
+  description: string;
+  features: string[];
+  price: number;
+};
+
+export const PRODUCTS: Product[] = [
   {
     id: 0,
     name: "Postcard",
@@ -41,4 +49,4 @@ export const PRODUCTS = [
     ],
     price: 80,
   },
-] as const;
+] satisfies Product[];
