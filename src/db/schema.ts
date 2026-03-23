@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const contacts = sqliteTable("contacts", {
@@ -5,4 +6,7 @@ export const contacts = sqliteTable("contacts", {
   email: text("email").notNull(),
   product: text("product").notNull(),
   details: text("details").notNull(),
+  createdAt: integer("timestamp2", { mode: "timestamp_ms" })
+    .notNull()
+    .default(sql`(unixepoch() * 1000)`),
 });
