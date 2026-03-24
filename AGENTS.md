@@ -25,6 +25,7 @@ The structure of our brand website starts with a short intro section about us an
 
 ## Code Sanity: DOs and DONTs
 
+- Use biome for linting the way have it configured in `./biome.json`
 - Commit Rules: Always respect formal [commit conventions](https://www.conventionalcommits.org/en/v1.0.0/#specification)
 - use semantic html
 - avoid unnecessay js for simple styling issues
