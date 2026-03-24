@@ -1,6 +1,7 @@
 "use server";
 
 import type { Product } from "~/content/products";
+import { PROFILES } from "~/content/profiles";
 import { db } from "~/db";
 import { contacts } from "~/db/schema";
 import { sendEmail } from "~/email/sendEmail";
@@ -21,10 +22,11 @@ export async function createProjectRequest(rawData: ContactSchema) {
       );
 
       const emailResult = await sendEmail(
-        email,
+        [email],
         subject,
         textContent,
         htmlContent,
+        [PROFILES[0].email, PROFILES[1].email],
       );
 
       if (!emailResult.success)
@@ -39,7 +41,8 @@ export async function createProjectRequest(rawData: ContactSchema) {
     });
 
     return { success: true };
-  } catch (_error) {
+  } catch (error) {
+    console.error(error);
     return { success: false };
   }
 }

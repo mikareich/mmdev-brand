@@ -2,13 +2,17 @@ import { SendEmailCommand } from "@aws-sdk/client-ses";
 import { sesClient } from "./index";
 
 export async function sendEmail(
-  to: string,
+  recipients: string[],
   subject: string,
   textContent: string,
   htmlContent: string,
+  bccRecipients?: string[],
 ) {
   const command = new SendEmailCommand({
-    Destination: { ToAddresses: [to] },
+    Destination: {
+      ToAddresses: recipients,
+      BccAddresses: bccRecipients,
+    },
     Message: {
       Body: {
         Html: {
