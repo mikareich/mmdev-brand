@@ -80,3 +80,9 @@ section {
     );
   }
 }
+
+@media (max-width: 1023px) {
+  .mobile-hidden {
+    display: none;
+  }
+}

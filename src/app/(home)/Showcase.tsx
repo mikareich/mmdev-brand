@@ -23,13 +23,12 @@ export default function Showcase() {
           key={1}
           className="col-span-full columns-1 sm:columns-2 lg:columns-3 gap-4"
         >
-          {PROJECTS.map((project) => {
+          {PROJECTS.map((project, index) => {
             const product = PRODUCTS.find((p) => p.id === project.productId);
-
             return (
               <div
                 key={project.title}
-                className="break-inside-avoid mb-4 inline-block w-full"
+                className={`break-inside-avoid mb-4 inline-block w-full ${index >= 4 ? "mobile-hidden" : ""}`}
               >
                 <BorderBox
                   asChild
