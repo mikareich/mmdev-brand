@@ -36,39 +36,47 @@ body {
 }
 
 :root {
-  --header-py-min: 0;
+  --header-py-min: 0px;
   --header-py-max: 16px;
   --header-font-min: 36px;
   --header-font-max: 54px;
-  --header-max-height: calc(
-    var(--header-py-max) *
-    2 +
-    var(--header-font-max) *
-    1.2
-  );
+  --header-height: 0px;
   --header-py: calc(
-    var(--header-py-max) -
-    (var(--header-py-max) - var(--header-py-min)) *
-    var(--scroll-progress)
-  );
-}
-
-.header {
-  padding-block: var(--header-py);
-}
-
-.header-title {
-  font-size: calc(
-    var(--header-font-max) -
-    (var(--header-font-max) - var(--header-font-min)) *
-    var(--scroll-progress)
+    var(--header-py-max) - (var(--header-py-max) - var(--header-py-min)) *
+      var(--scroll-progress)
   );
 }
 
 main {
-  margin-top: var(--header-max-height);
+  margin-top: calc(var(--header-height) / 2);
+}
+section {
+  scroll-margin-top: calc(var(--header-height) / 2);
 }
 
-section {
-  scroll-margin-top: var(--header-max-height);
+.header {
+  padding-block: var(--header-py-min);
+}
+
+.header-title {
+  font-size: var(--header-font-min);
+}
+
+@media (min-width: 1024px) {
+  main {
+    margin-top: var(--header-height);
+  }
+  section {
+    scroll-margin-top: var(--header-height);
+  }
+  .header {
+    padding-block: var(--header-py);
+  }
+  .header-title {
+    font-size: calc(
+      var(--header-font-max) -
+        (var(--header-font-max) - var(--header-font-min)) *
+        var(--scroll-progress)
+    );
+  }
 }

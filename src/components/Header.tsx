@@ -2,7 +2,7 @@
 
 import { Cross1Icon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 
 const HEADER_SHRINK_SCROLL_DISTANCE = 100;
@@ -77,17 +77,27 @@ function MobileHeaderNav({
 }
 
 export default function Header() {
+  const headerRef = useRef<HTMLElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     history.scrollRestoration = "manual";
 
-    // Restore saved position
     const saved = sessionStorage.getItem("scrollY");
     if (saved) {
       window.scrollTo(0, parseInt(saved));
       sessionStorage.removeItem("scrollY");
     }
+
+    const header = headerRef.current;
+    if (!header) return;
+
+    const updateHeight = () => {
+      document.documentElement.style.setProperty(
+        "--header-height",
+        header.offsetHeight + "px",
+      );
+    };
 
     const onScroll = () => {
       const progress = Math.min(
@@ -100,9 +110,16 @@ export default function Header() {
       );
       sessionStorage.setItem("scrollY", String(window.scrollY));
     };
+
+    updateHeight();
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", updateHeight);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", updateHeight);
+    };
   }, []);
 
   const scrollTop = () => {
@@ -119,7 +136,10 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed top-0 left-0 z-50 bg-taupe-100 w-full border-b border-taupe-300">
+    <header
+      className="fixed top-0 left-0 z-50 bg-taupe-100 w-full border-b border-taupe-300"
+      ref={headerRef}
+    >
       <div className="px-4 w-full h-full m-auto container">
         <div className="header flex justify-between items-center w-full border-taupe-300 border-x h-full">
           <div className="min-w-fit px-4">
