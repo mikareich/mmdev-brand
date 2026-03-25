@@ -1,5 +1,14 @@
-import { Database } from "bun:sqlite";
-import { drizzle } from "drizzle-orm/bun-sqlite";
+import { drizzle } from "drizzle-orm/libsql";
 
-const sqlite = new Database("sqlite.db");
-export const db = drizzle(sqlite);
+const { DB_URL, DB_TOKEN } = process.env;
+
+if (!DB_URL || !DB_TOKEN) {
+  throw new Error("Database credentials not set!");
+}
+
+export const db = drizzle({
+  connection: {
+    url: DB_URL,
+    authToken: DB_TOKEN,
+  },
+});
