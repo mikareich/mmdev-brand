@@ -1,5 +1,6 @@
 "use server";
 
+import { eq } from "drizzle-orm";
 import type { Product } from "~/content/products";
 import { PROFILES } from "~/content/profiles";
 import { db } from "~/db";
@@ -16,6 +17,15 @@ export async function createProjectRequest(rawData: ContactSchema) {
     const product = getProductById(Number(productId)) as Product;
 
     await db.transaction(async (db) => {
+      const [newContact] = await db
+        .insert(contacts)
+        .values({
+          email,
+          product: productId,
+          details,
+        })
+        .returning();
+
       const { subject, textContent, htmlContent } = getConfirmationEmail(
         product.name,
         details,
@@ -32,12 +42,10 @@ export async function createProjectRequest(rawData: ContactSchema) {
       if (!emailResult.success)
         throw new Error("Error while send the confirmation email!");
 
-      await db.insert(contacts).values({
-        email,
-        product: productId,
-        details,
-        messageId: emailResult.messageId,
-      });
+      await db
+        .update(contacts)
+        .set({ messageId: emailResult.messageId })
+        .where(eq(contacts.id, newContact.id));
     });
 
     return { success: true };
