@@ -2,8 +2,10 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as Form from "@radix-ui/react-form";
+import Image from "next/image";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
+import UndrawDevelopment from "~/../public/undraw_development_s4gv.svg";
 import { createProjectRequest } from "~/actions/contact";
 import BorderBox from "~/components/BorderBox";
 import Button from "~/components/Button";
@@ -62,14 +64,18 @@ export default function Contact() {
           asChild
           className="p-1 sm:p-2 border-theme-border-subtle"
         >
-          <div className="space-y-2">
-            <h3 className="font-bold text-lg">Let's build something.</h3>
-
+          <div className="space-y-2 flex flex-col">
             <p>
               Ready to establish your online presence? Fill out the form with
               your project details, and we'll get back to you as soon as
               possible to discuss the next steps.
             </p>
+
+            <Image
+              src={UndrawDevelopment}
+              alt=""
+              className="aspect-square h-auto w-1/2"
+            />
           </div>
         </BorderBox>,
         <BorderBox
