@@ -33,6 +33,8 @@ The structure of our brand website starts with a short intro section about us an
 - if you encounter css values that are usally reusable given the context (text-red-500 to be "destructive"), take a look at `./src/app/globals.css` to either use the values that are already present or define a new variable and use this.
 - use `z.email` instead of `z.string().email`
 - every ui component should be directly in the `./src/components` folder, not in a nested `ui` folder.
+- never use `interface` but always `type` in typescript.
+- always use bun bindings in favor of node native ones (e.g. `Bun.file` instead of `node:fs`)
 
 ## References
 
