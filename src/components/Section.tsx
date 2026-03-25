@@ -1,56 +1,169 @@
-import type React from "react";
+import { Slot } from "radix-ui";
+import React from "react";
 import cn from "~/utils/cn";
 import { zeroPad } from "~/utils/zeroPad";
 import BorderBox from "./BorderBox";
 
-type SectionProps = {
-  level: number;
-  title: string;
-  headerActions?: React.ReactNode;
-  children: React.ReactNode[];
-} & React.ComponentProps<"section">;
+type SectionRootProps = React.ComponentProps<"section"> & {
+  asChild?: boolean;
+};
 
-export default function Section({
-  className,
-  level,
-  title,
-  headerActions,
-  children: contents,
-  ...props
-}: SectionProps) {
-  const hasActions = !!headerActions;
-  const id = title.toLowerCase().replace(/\s+/g, "-");
+function isComponentType(child: React.ReactNode, displayName: string) {
+  if (!React.isValidElement(child)) return false;
+  const type = child.type as { displayName?: string };
+  return type.displayName === displayName;
+}
+
+function SectionRoot({ className, children, ...props }: SectionRootProps) {
+  let titleElement: React.ReactNode = null;
+  let actionsElement: React.ReactNode = null;
+  const contentElements: React.ReactNode[] = [];
+
+  React.Children.forEach(children, (child) => {
+    if (isComponentType(child, "SectionTitle")) {
+      titleElement = child;
+    } else if (isComponentType(child, "SectionActions")) {
+      actionsElement = child;
+    } else if (isComponentType(child, "SectionContent")) {
+      contentElements.push(child);
+    }
+  });
+
+  const hasHeader = titleElement || actionsElement;
 
   return (
     <BorderBox className="border-theme-border" asChild>
       <section
         className={cn(
-          "w-fill p-2 sm:p-4 bg-theme-background-accent overflow-hidden grid gap-4",
-          hasActions ? "grid-cols-2" : "grid-cols-1",
+          "w-full p-2 sm:p-4 bg-theme-background-accent overflow-hidden grid gap-4",
           className,
         )}
-        id={id}
         {...props}
       >
-        <BorderBox
-          asChild
-          className="col-span-full p-1 sm:p-2 leading-none border-theme-border-subtle"
-        >
-          <div className={cn(hasActions && "grid grid-cols-2 items-center")}>
-            <h2 className="flex gap-2 font-bold text-2xl font-heading">
-              <span className="text-theme-text-subtle">{zeroPad(level)}</span>
-              <span className="text-theme-text-subtle">/</span>
-              <span className="text-theme-text uppercase">{title}</span>
-            </h2>
-
-            {hasActions && (
-              <div className="justify-self-end">{headerActions}</div>
-            )}
-          </div>
-        </BorderBox>
-
-        {contents}
+        {hasHeader && (
+          <BorderBox
+            asChild
+            className="col-span-full p-1 sm:p-2 leading-none border-theme-border-subtle"
+          >
+            <div
+              className={cn(
+                "grid items-center w-full",
+                actionsElement ? "grid-cols-2" : "grid-cols-1",
+              )}
+            >
+              {titleElement}
+              {actionsElement}
+            </div>
+          </BorderBox>
+        )}
+        {contentElements}
       </section>
     </BorderBox>
   );
 }
+SectionRoot.displayName = "SectionRoot";
+
+type SectionTitleProps = React.ComponentProps<"div"> & {
+  level: number | string;
+  asChild?: boolean;
+};
+
+function SectionTitleComponent({
+  className,
+  level,
+  children,
+  asChild,
+  ...props
+}: SectionTitleProps) {
+  const Comp = asChild ? Slot.Root : "h2";
+
+  return (
+    <Comp
+      className={cn(
+        "flex gap-2 font-bold text-2xl font-heading items-center",
+        className,
+      )}
+      {...props}
+    >
+      {asChild ? (
+        children
+      ) : (
+        <>
+          <span className="text-theme-text-subtle">
+            {zeroPad(Number(level))}
+          </span>
+          <span className="text-theme-text-subtle">/</span>
+          <span className="text-theme-text uppercase">{children}</span>
+        </>
+      )}
+    </Comp>
+  );
+}
+
+const SectionTitle = Object.assign(SectionTitleComponent, {
+  displayName: "SectionTitle",
+});
+
+type SectionActionsProps = React.ComponentProps<"div"> & {
+  asChild?: boolean;
+};
+
+function SectionActionsComponent({
+  className,
+  children,
+  asChild,
+  ...props
+}: SectionActionsProps) {
+  const Comp = asChild ? Slot.Root : "div";
+  return (
+    <Comp
+      className={cn("justify-self-end flex items-center", className)}
+      {...props}
+    >
+      {children}
+    </Comp>
+  );
+}
+
+const SectionActions = Object.assign(SectionActionsComponent, {
+  displayName: "SectionActions",
+});
+
+type SectionContentProps = React.ComponentProps<"div"> & {
+  asChild?: boolean;
+};
+
+function SectionContentComponent({
+  className,
+  children,
+  asChild,
+  ...props
+}: SectionContentProps) {
+  if (asChild) {
+    return (
+      <Slot.Root className={className} {...props}>
+        {children}
+      </Slot.Root>
+    );
+  }
+
+  return (
+    <BorderBox
+      className={cn("p-1 sm:p-2 border-theme-border-subtle prose", className)}
+    >
+      <div {...props}>{children}</div>
+    </BorderBox>
+  );
+}
+
+const SectionContent = Object.assign(SectionContentComponent, {
+  displayName: "SectionContent",
+});
+
+export const Section = Object.assign(SectionRoot, {
+  Title: SectionTitle,
+  Actions: SectionActions,
+  Content: SectionContent,
+});
+
+export default Section;
