@@ -13,6 +13,7 @@ export const PROFILES = [
     ),
     linkedin: "https://linkedin.com/in/mikareich",
     github: "https://github.com/mikareich",
+    email: "mikareich0@gmail.com",
   },
   {
     name: "Marco Zillgen",
@@ -26,5 +27,6 @@ export const PROFILES = [
     ),
     linkedin: "https://linkedin.com/in/marcozillgen",
     github: "https://github.com/marcozillgen",
+    email: "marcosimonzillgen@gmail.com",
   },
 ] as const;
