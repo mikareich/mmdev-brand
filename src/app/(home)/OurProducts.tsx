@@ -19,23 +19,39 @@ export default function OurProducts() {
         level={2}
         title="Our Products"
         headerActions={
-          <Tabs.List className="flex gap-2">
-            {PRODUCTS.map((product) => (
-              <Tabs.Trigger
-                value={product.id.toString()}
-                key={product.id}
-                asChild
-              >
-                <Button
-                  variant={
-                    product.id.toString() === activeTab ? "filled" : "outlined"
-                  }
-                >
+          <>
+            {/* TODO: Substitute with already implemented selection component */}
+            <select
+              className="sm:hidden border-theme-border bg-theme-background p-1"
+              value={activeTab}
+              onChange={(e) => setActiveTab(e.target.value)}
+            >
+              {PRODUCTS.map((product) => (
+                <option key={product.id} value={product.id.toString()}>
                   {product.name}
-                </Button>
-              </Tabs.Trigger>
-            ))}
-          </Tabs.List>
+                </option>
+              ))}
+            </select>
+            <Tabs.List className="hidden sm:flex gap-2">
+              {PRODUCTS.map((product) => (
+                <Tabs.Trigger
+                  value={product.id.toString()}
+                  key={product.id}
+                  asChild
+                >
+                  <Button
+                    variant={
+                      product.id.toString() === activeTab
+                        ? "filled"
+                        : "outlined"
+                    }
+                  >
+                    {product.name}
+                  </Button>
+                </Tabs.Trigger>
+              ))}
+            </Tabs.List>
+          </>
         }
       >
         {[

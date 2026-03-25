@@ -6,7 +6,7 @@ import { PROFILES } from "~/content/profiles";
 
 export default function WhoWeAre() {
   return (
-    <Section level={1} title="Who we are" className="grid-cols-2">
+    <Section level={1} title="Who we are" className="lg:grid-cols-2">
       {[
         <BorderBox
           className="border-theme-border-subtle col-span-full"
