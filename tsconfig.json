@@ -20,10 +20,13 @@
     ],
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "types": ["bun", "node", "react", "react-dom"]
   },
   "include": [
     "next-env.d.ts",
+    "mdx-source.d.ts",
+    "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",

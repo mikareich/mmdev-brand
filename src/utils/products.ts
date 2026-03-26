@@ -50,3 +50,7 @@ export const PRODUCTS: Product[] = [
     price: 80,
   },
 ] satisfies Product[];
+
+export function getProductById(id: number) {
+  return PRODUCTS.find((product) => product.id === id) || null;
+}

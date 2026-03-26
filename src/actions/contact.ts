@@ -1,14 +1,14 @@
 "use server";
 
 import { eq } from "drizzle-orm";
-import type { Product } from "~/content/products";
-import { PROFILES } from "~/content/profiles";
 import { db } from "~/db";
 import { contacts } from "~/db/schema";
 import { sendEmail } from "~/email/sendEmail";
 import { getConfirmationEmail } from "~/email/templates/confirmation";
 import { type ContactSchema, contactSchema } from "~/utils/contactSchema";
-import { getProductById } from "~/utils/getProductById";
+import type { Product } from "~/utils/products";
+import { getProductById } from "~/utils/products";
+import { PROFILES } from "~/utils/profiles";
 
 export async function createProjectRequest(rawData: ContactSchema) {
   try {

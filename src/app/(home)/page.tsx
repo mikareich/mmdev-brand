@@ -1,18 +1,23 @@
-import Contact from "./Contact";
-import OurProducts from "./OurProducts";
-import Showcase from "./Showcase";
-import WhoWeAre from "./WhoWeAre";
+import { getMdxContent } from "~/utils/cms";
+import ContactForm from "./components/ContactForm";
+import ProductTabs from "./components/ProductTabs";
+import Profiles from "./components/Profiles";
+import ProjectList from "./components/ProjectList";
+import Contact from "./content/contact.mdx";
+import OurProducts from "./content/our-products.mdx";
+import Showcase from "./content/showcase.mdx";
+import WhoWeAre from "./content/who-we-are.mdx";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <article className="grid grid-cols-1 gap-6 sm:gap-16">
-      <WhoWeAre />
+    <article className="container">
+      {await getMdxContent(WhoWeAre, { Profiles })}
 
-      <OurProducts />
+      {await getMdxContent(OurProducts, { ProductTabs })}
 
-      <Showcase />
+      {await getMdxContent(Showcase, { ProjectList })}
 
-      <Contact />
+      {await getMdxContent(Contact, { ContactForm })}
     </article>
   );
 }

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { PRODUCTS } from "~/content/products";
+import { PRODUCTS } from "~/utils/products";
 
 export const contactSchema = z.object({
   product: z
