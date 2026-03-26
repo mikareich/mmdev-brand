@@ -149,9 +149,11 @@ function SectionContentComponent({
 
   return (
     <BorderBox
-      className={cn("p-1 sm:p-2 border-theme-border-subtle prose", className)}
+      className={cn("p-1 sm:p-2 border-theme-border-subtle", className)}
     >
-      <div {...props}>{children}</div>
+      <div className="prose" {...props}>
+        {children}
+      </div>
     </BorderBox>
   );
 }

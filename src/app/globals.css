@@ -34,7 +34,7 @@ body {
 }
 
 @utility prose {
-  @apply font-body leading-loose;
+  @apply font-body leading-loose space-y-2;
 
   h1,
   h2,
@@ -51,6 +51,19 @@ body {
 
   ul {
     @apply list-disc list-inside mt-4 marker:text-theme-text-subtle;
+  }
+
+  blockquote {
+    p {
+      all: unset;
+      @apply flex;
+    }
+
+    ::before {
+      @apply block content-['//'] mr-1 text-theme-border;
+    }
+
+    @apply font-heading font-medium text-lg flex italic text-theme-text-subtle items-center;
   }
 }
 

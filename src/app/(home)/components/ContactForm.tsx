@@ -102,7 +102,7 @@ export default function ContactForm() {
           <Form.Control asChild>
             <Textarea
               id="details"
-              rows={5}
+              rows={10}
               placeholder="Tell us about your project goals and scope..."
               {...register("details")}
             />
