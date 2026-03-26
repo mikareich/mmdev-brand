@@ -29,6 +29,44 @@ body {
   @apply font-medium text-sm uppercase;
 }
 
+@utility container {
+  @apply grid grid-cols-1 gap-6 sm:gap-16;
+}
+
+@utility prose {
+  @apply font-body leading-loose space-y-2;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-bold uppercase;
+  }
+
+  ol {
+    @apply list-decimal list-inside mt-4 marker:text-theme-text-subtle;
+  }
+
+  ul {
+    @apply list-disc list-inside mt-4 marker:text-theme-text-subtle;
+  }
+
+  blockquote {
+    p {
+      all: unset;
+      @apply flex;
+    }
+
+    ::before {
+      @apply block content-['//'] mr-1 text-theme-border;
+    }
+
+    @apply font-heading font-medium text-lg flex italic text-theme-text-subtle items-center;
+  }
+}
+
 @property --scroll-progress {
   syntax: "<number>";
   inherits: true;
